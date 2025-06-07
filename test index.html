@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Калькулятор зарплаты</title>
+  <style>
+    @font-face {
+      font-family: 'IQOS Sans Bold';
+      src: url('IQOSSans-Bold.woff2') format('woff2'),
+           url('IQOSSans-Bold.woff') format('woff');
+      font-weight: bold;
+    }
+
+    @font-face {
+      font-family: 'IQOS Sans Regular';
+      src: url('IQOSSans-Regular.woff2') format('woff2'),
+           url('IQOSSans-Regular.woff') format('woff');
+      font-weight: normal;
+    }
+
+    body {
+  font-family: 'IQOS Sans Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #000;
+}
+
+    h1 {
+      text-align: center;
+      font-family: 'IQOS Sans Bold', sans-serif;
+      font-size: 1.6em;
+      margin-bottom: 1em;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: auto;
+    }
+
+    .input-group {
+      margin-bottom: 1em;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4em;
+      font-family: 'IQOS Sans Bold', sans-serif;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      font-size: 1em;
+      font-family: 'IQOS Sans Regular', sans-serif;
+    }
+
+    .result {
+      margin-top: 1.5em;
+      border-top: 1px solid #ccc;
+      padding-top: 1em;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5em;
+      font-size: 1em;
+    }
+
+    .result-row span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Калькулятор зарплаты</h1>
+
+    <div class="input-group">
+      <label for="city">Город:</label>
+      <select id="city">
+        <option value="Ростов-на-Дону">Ростов-на-Дону</option>
+        <option value="Новочеркасск">Новочеркасск</option>
+        <option value="Шахты">Шахты</option>
+        <option value="Таганрог">Таганрог</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="grade">Грейд:</label>
+      <select id="grade">
+        <option value="Джуниор-сейлс-эксперт">JSE</option>
+        <option value="Сейлс-эксперт">SE</option>
+        <option value="Синьор-сейлс-эксперт">SSE</option>
+        <option value="Джуниор-стор-менеджер">Junior SM</option>
+        <option value="Стор-менеджер">SM</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="hoursWith">Часы с обедом:</label>
+      <input type="number" id="hoursWith" value="0" min="0" />
+    </div>
+
+    <div class="input-group">
+      <label for="hoursWithout">Часы без обеда:</label>
+      <input type="number" id="hoursWithout" value="0" min="0" />
+    </div>
+
+    <div class="input-group">
+      <label for="format">Формат точки:</label>
+      <select id="format">
+        <option value="БИАР">BR</option>
+        <option value="САУ">SAU</option>
+      </select>
+    </div>
+
+    <div class="result">
+      <div class="result-row"><div>Ставка в час:</div><span id="rate"></span></div>
+      <div class="result-row"><div>Оклад за часы:</div><span id="salary"></span></div>
+      <div class="result-row"><div>Бонус за час:</div><span id="bonus"></span></div>
+      <div class="result-row"><div>Зарплата при 80%:</div><span id="pay80"></span></div>
+      <div class="result-row"><div>Зарплата при 90%:</div><span id="pay90"></span></div>
+      <div class="result-row"><div>Зарплата при 100%:</div><span id="pay100"></span></div>
+      <div class="result-row"><div>Зарплата при 110%:</div><span id="pay110"></span></div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      "Ростов-на-Дону": {
+        "Джуниор-сейлс-эксперт": {unit:"Ставка", rate:213, bonus:142},
+        "Сейлс-эксперт": {unit:"Ставка", rate:249, bonus:166},
+        "Синьор-сейлс-эксперт": {unit:"Ставка", rate:300, bonus:200},
+        "Джуниор-стор-менеджер": {unit:"Оклад", rate:58709, bonus:39139.3333},
+        "Стор-менеджер": {unit:"Оклад", rate:62901, bonus:41934}
+      },
+      "Новочеркасск": {
+        "Джуниор-сейлс-эксперт": {unit:"Ставка", rate:186, bonus:124},
+        "Сейлс-эксперт": {unit:"Ставка", rate:218, bonus:145.3333},
+        "Синьор-сейлс-эксперт": {unit:"Ставка", rate:261, bonus:174},
+        "Джуниор-стор-менеджер": {unit:"Оклад", rate:51301, bonus:34200.6667},
+        "Стор-менеджер": {unit:"Оклад", rate:54966, bonus:36644}
+      },
+      "Шахты": {
+        "Джуниор-сейлс-эксперт": {unit:"Ставка", rate:199, bonus:132.6667},
+        "Сейлс-эксперт": {unit:"Ставка", rate:233, bonus:155.3333},
+        "Синьор-сейлс-эксперт": {unit:"Ставка", rate:280, bonus:186.6667},
+        "Джуниор-стор-менеджер": {unit:"Оклад", rate:54867, bonus:36578},
+        "Стор-менеджер": {unit:"Оклад", rate:58787, bonus:39191.3333}
+      },
+      "Таганрог": {
+        "Джуниор-сейлс-эксперт": {unit:"Ставка", rate:173, bonus:115.3333},
+        "Сейлс-эксперт": {unit:"Ставка", rate:203, bonus:135.3333},
+        "Синьор-сейлс-эксперт": {unit:"Ставка", rate:244, bonus:162.6667},
+        "Джуниор-стор-менеджер": {unit:"Оклад", rate:47735, bonus:31823.3333},
+        "Стор-менеджер": {unit:"Оклад", rate:51144, bonus:34096}
+      }
+    };
+
+    function calculate() {
+      const city = document.getElementById("city").value;
+      const grade = document.getElementById("grade").value;
+      const hoursWithout = parseFloat(document.getElementById("hoursWithout").value) || 0;
+      const format = document.getElementById("format").value;
+      const entry = data[city][grade];
+      let rate, bonusPerHour;
+      if (entry.unit === "Ставка") {
+        rate = entry.rate;
+        bonusPerHour = entry.bonus;
+      } else {
+        rate = entry.rate / 157.5;
+        bonusPerHour = entry.bonus / 157.5;
+      }
+      if (format === "САУ") {
+        bonusPerHour *= 1.10;
+      }
+      const baseSalary = hoursWithout * rate;
+      const baseBonus = hoursWithout * bonusPerHour;
+      const pay80 = baseSalary + 0.6 * baseBonus;
+      const pay90 = baseSalary + 0.8 * baseBonus;
+      const pay100 = baseSalary + 1.0 * baseBonus;
+      const pay110 = baseSalary + 1.25 * baseBonus;
+
+      document.getElementById("rate").textContent = rate.toFixed(2) + " ₽";
+      document.getElementById("salary").textContent = baseSalary.toFixed(2) + " ₽";
+      document.getElementById("bonus").textContent = bonusPerHour.toFixed(2) + " ₽";
+      document.getElementById("pay80").textContent = pay80.toFixed(2) + " ₽";
+      document.getElementById("pay90").textContent = pay90.toFixed(2) + " ₽";
+      document.getElementById("pay100").textContent = pay100.toFixed(2) + " ₽";
+      document.getElementById("pay110").textContent = pay110.toFixed(2) + " ₽";
+    }
+
+    document.getElementById("city").addEventListener("change", calculate);
+    document.getElementById("grade").addEventListener("change", calculate);
+    document.getElementById("hoursWith").addEventListener("input", calculate);
+    document.getElementById("hoursWithout").addEventListener("input", calculate);
+    document.getElementById("format").addEventListener("change", calculate);
+    calculate();
+  </script>
+</body>
+</html>
