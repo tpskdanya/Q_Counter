@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Калькулятор зарплаты</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Калькулятор зарплаты</h1>
+
+    <div class="input-group">
+      <label for="city">Город:</label>
+      <select id="city">
+        <option value="Ростов-на-Дону">Ростов-на-Дону</option>
+        <option value="Новочеркасск">Новочеркасск</option>
+        <option value="Шахты">Шахты</option>
+        <option value="Таганрог">Таганрог</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="grade">Грейд:</label>
+      <select id="grade">
+        <option value="Джуниор-сейлс-эксперт">JSE</option>
+        <option value="Сейлс-эксперт">SE</option>
+        <option value="Синьор-сейлс-эксперт">SSE</option>
+        <option value="Джуниор-стор-менеджер">Junior SM</option>
+        <option value="Стор-менеджер">SM</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="hoursWith">Часы с обедом:</label>
+      <input type="number" id="hoursWith" placeholder="0" min="0" onfocus="if(this.value==='0') this.value=''" />
+    </div>
+
+    <div class="input-group">
+      <label for="hoursWithout">Часы без обеда:</label>
+      <input type="number" id="hoursWithout" placeholder="0" min="0" onfocus="if(this.value==='0') this.value=''" />
+    </div>
+
+    <div class="input-group">
+      <label for="format">Формат точки:</label>
+      <select id="format">
+        <option value="БИАР">BR</option>
+        <option value="САУ">SAU</option>
+      </select>
+    </div>
+
+    <div class="result">
+      <div class="result-row"><div>Ставка в час:</div><span id="rate"></span></div>
+      <div class="result-row"><div>Оклад за часы:</div><span id="salary"></span></div>
+      <div class="result-row"><div>Бонус за час:</div><span id="bonus"></span></div>
+      <div class="result-row"><div>З/п при 80%:</div><span id="pay80"></span></div>
+      <div class="result-row"><div>З/п при 90%:</div><span id="pay90"></span></div>
+      <div class="result-row"><div>З/п при 100%:</div><span id="pay100"></span></div>
+      <div class="result-row"><div>З/п при 110%:</div><span id="pay110"></span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
