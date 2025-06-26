@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'IQOSSans';
+  src: url('IQOSSans-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'IQOSSans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('back.mov') no-repeat center center fixed;
+  background-size: cover;
+  color: #000;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.6em;
+  margin-bottom: 1em;
+}
+
+.container {
+  width: 90%; /* Контейнер занимает всю ширину экрана */
+  max-width: 480px; /* Но не шире 480px — ограничение для мобильной вёрстки */
+  margin: 5vh auto; /* Отступ сверху и снизу 5% от высоты экрана, авто по бокам — центрирует блок */
+  padding: 20px 5vw; /* Внутренние отступы: сверху/снизу фиксированные 20px, слева/справа — 5% от ширины экрана */
+  background: rgba(255, 255, 255, 0.4); /* Полупрозрачный белый фон, чтобы сквозь него было видно видео или фон-картинку */
+  border-radius: 12px; /* Скруглённые углы: выглядит мягко и современно */
+  box-shadow: none; /* Нет теней — блок "встроен" в фон без объёма */
+  border: none; /* Убираем возможные стандартные рамки браузера */
+  box-sizing: border-box; /* Важно: padding и border входят в общую ширину/высоту, не растягивают контейнер */
+}
+
+.input-group {
+  margin-bottom: 1.2em;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #222;
+}
+
+select, input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1em;
+  font-family: 'IQOSSans', sans-serif;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+select:focus, input[type="number"]:focus {
+  border-color: #0078D7;
+  outline: none;
+}
+
+.result {
+  margin-top: 2em;
+  border-top: 2px solid #ddd;
+  padding-top: 1em;
+  font-size: 1.05em;
+  color: #111;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7em;
+  font-weight: 500;
+}
+
+.result-row span {
+  font-weight: 700;
+  color: #0078D7;
+}
+
+.beta {
+  font-size: 0.4em;
+  color: #555;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-left: 8px;
+  vertical-align: super; /* чуть выше поднимает */
+}
