@@ -84,3 +84,13 @@ select:focus, input[type="number"]:focus {
   margin-left: 8px;
   vertical-align: super; /* чуть выше поднимает */
 }
+
+#backgroundVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
