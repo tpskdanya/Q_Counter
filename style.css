@@ -52,7 +52,7 @@ select, input[type="number"] {
 }
 
 select:focus, input[type="number"]:focus {
-  border-color: #0078D7;
+  border-color: #222;
   outline: none;
 }
 
@@ -73,7 +73,7 @@ select:focus, input[type="number"]:focus {
 
 .result-row span {
   font-weight: 700;
-  color: #0078D7;
+  color: #222;
 }
 
 .beta {
