@@ -42,6 +42,7 @@ label {
 
 select, input[type="number"] {
   width: 100%;
+  color: #000;
   padding: 10px 12px;
   font-size: 1em;
   font-family: 'IQOSSans', sans-serif;
